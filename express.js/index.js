@@ -38,7 +38,7 @@ app.get("/search", (req, res) => {
 });
 
 app.get("/home", (req, res) => {
-    res.send("you contacted home path");
+    res.send("you contacted home path. (but I'm changing some text to see actually if nodemon recognizes)");
 });
 
 app.get(/.*/, (req, res) => {  // '*' is a wildcard
