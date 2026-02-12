@@ -53,6 +53,9 @@ app.get("/", (req, res) => {
 // understanding path parameters
 
 app.get("/:username/:id", (req, res) =>{
-    console.log(req.params);
-    res.send("Successful! check your terminal.")
+    // console.log(req.params);
+    // instead of just printing them we can store it in variables
+    let {username, id} = req.params;
+    let htmlStr = "<h1>welcome to the page of @${username}</h1>";
+    res.send(htmlStr)
 })
