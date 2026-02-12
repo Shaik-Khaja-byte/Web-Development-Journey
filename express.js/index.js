@@ -33,18 +33,26 @@ app.get("/", (req, res) => {
     res.send("you contacted root path");
 });
 
-app.get("/search", (req, res) => {
-    res.send("you contacted search path");
-});
+// app.get("/search", (req, res) => {
+//     res.send("you contacted search path");
+// });
 
-app.get("/home", (req, res) => {
-    res.send("you contacted home path. (but I'm changing some text to see actually if nodemon recognizes)");
-});
+// app.get("/home", (req, res) => {
+//     res.send("you contacted home path. (but I'm changing some text to see actually if nodemon recognizes)");
+// });
 
-app.get(/.*/, (req, res) => {  // '*' is a wildcard
-    res.status(404).send("requested route does not exist");
-});
+// app.get(/.*/, (req, res) => {  // '*' is a wildcard
+//     res.status(404).send("requested route does not exist");
+// });
 
-app.post("/", (req, res) => {
-    res.send("you sent a post request");
-});
+// app.post("/", (req, res) => {
+//     res.send("you sent a post request");
+// });
+
+
+// understanding path parameters
+
+app.get("/:username/:id", (req, res) =>{
+    console.log(req.params);
+    res.send("Successful! check your terminal.")
+})
