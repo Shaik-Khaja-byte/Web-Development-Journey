@@ -22,6 +22,11 @@ app.get("/rollDice", (req, res)=>{
     res.render("rollDice.ejs", {rollDice});
 })
 
+app.get("/ig/:username", (req, res) => {
+    let {username} = req.params;
+    res.render("instagram.ejs", {username});
+})
+
 app.listen(port, ()=>{
     console.log(`listening to the port ${port}`)
 })
