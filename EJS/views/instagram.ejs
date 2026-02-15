@@ -9,5 +9,11 @@
     <h1>This account belons to : @<%= username %></h1>
     <button>Follow</button>
     <button>Message</button>
+    <h2>People who follow you : </h2>
+    <ul>
+        <% for(let name of followers){ %>
+        <li><%= name %></li>
+        <% } %>
+    </ul>
 </body>
 </html>
