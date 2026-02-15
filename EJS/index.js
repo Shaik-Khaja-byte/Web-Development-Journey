@@ -17,7 +17,9 @@ app.get("/home", (req, res)=>{
 
 // adding a new route to test rollDice
 app.get("/rollDice", (req, res)=>{
-    res.render("rollDice.ejs");
+    // data actuall comes from index.js so instead of hardcoring we pu the data in a variable and use it in ejs file
+    let rollDice = Math.floor(Math.random()*6) + 1;
+    res.render("rollDice.ejs", {rollDice});
 })
 
 app.listen(port, ()=>{
