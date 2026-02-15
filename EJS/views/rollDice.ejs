@@ -7,5 +7,8 @@
 </head>
 <body>
     <h1>The value of the dice is : <%= rollDice %></h1>
+    <% if (rollDice == 6) { %>
+        <h2>Nice! roll the dice again</h2>
+    <% } %>
 </body>
 </html>
