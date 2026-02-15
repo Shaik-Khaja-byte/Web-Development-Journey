@@ -15,6 +15,11 @@ app.get("/home", (req, res)=>{
     res.send("Hello...");
 })
 
+// adding a new route to test rollDice
+app.get("/rollDice", (req, res)=>{
+    res.render("rollDice.ejs");
+})
+
 app.listen(port, ()=>{
     console.log(`listening to the port ${port}`)
 })
