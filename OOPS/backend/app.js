@@ -15,28 +15,48 @@
 
 // console.log(arr1.push === arr2.push) // true beacause prototype functions serve as a common template 
 
-
+// -----------------------------------------------------------------------------------------------------------------------------
 
 // factory functions
 
-function personMaker(name, age){
-    const person = {
-        name : name,
-        age : age, 
-        talk(){
-            console.log(`Hi, my name is ${name}`)
-        }
-    }
-    return person;
+// function personMaker(name, age){
+//     const person = {
+//         name : name,
+//         age : age, 
+//         talk(){
+//             console.log(`Hi, my name is ${name}`)
+//         }
+//     }
+//     return person;
+// }
+
+// let p1 = personMaker("Shaik Khaja", 21);
+// let p2 = personMaker("Rahul", 21);
+
+// console.log(p1)
+// console.log(p1.talk())
+
+// // this is somewhat a better way of creating objects, but still ineffecient
+
+// // let's see how
+// console.log(p1.talk === p2.talk) // false separate copies are created for each object
+
+//------------------------------------------------------------------------------------------------------------------------------
+
+// constructors - returns nothing and starts with capital
+
+function Person(name, age){
+    this.name = name;
+    this.age = age;
 }
 
-let p1 = personMaker("Shaik Khaja", 21);
-let p2 = personMaker("Rahul", 21);
+Person.prototype.talk = () => {
+    console.log(`Hello, my name is ${name}`);
+}
 
-console.log(p1)
-console.log(p1.talk())
+let p1 = new Person("Shaik Khaja", 21)
+let p2 = new Person("Rahul", 20)
 
-// this is somewhat a better way of creating objects, but still ineffecient
+console.log(p1.talk == p2.talk); // true
 
-// let's see how
-console.log(p1.talk === p2.talk) // false separate copies are created for each object
+// here the blueprint is given to the constructors and objects are created with the help of new keyword
