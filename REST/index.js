@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const port = 8080;
 const path = require("path");
+const {v4: uuidv4} = require('uuid')
 
 app.use(express.urlencoded({extended: true}));
 
@@ -12,14 +13,17 @@ app.use(express.static(path.join(__dirname, "public")));
 
 let posts = [
     {
+        id : uuidv4(),
         username : "desishaikster",
         content : "I love coding"
     },
     {
+        id : uuidv4(),
         username : "ananthraj",
         content : "I love to do research"
     },
     {
+        id : uuidv4(),
         username : "rahulbandi",
         content : "I got selected for my first internship"
     },
@@ -38,8 +42,16 @@ app.get("/posts/new", (req, res) => {
 // API for post request
 app.post("/posts", (req, res) => {
     let {username, content} = req.body;
-    posts.push({username, content})
+    let id = uuidv4()
+    posts.push({id, username, content})
     res.redirect("/posts") // the final redirection to the specified url
+})
+
+// API for viewing a single post
+app.get("/posts/:id", (req, res) => {
+    let {id} = req.params;
+    let post = posts.find((p) => id === p.id)
+    res.render("show.ejs", {post})
 })
 
 app.listen(port, ()=>{
