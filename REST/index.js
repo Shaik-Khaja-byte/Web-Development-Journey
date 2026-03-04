@@ -23,10 +23,23 @@ let posts = [
         username : "rahulbandi",
         content : "I got selected for my first internship"
     },
-]
+];
 
+// API for viewing the posts
 app.get("/posts", (req, res) => {
     res.render("index.ejs", {posts});
+})
+
+// API for creating a post
+app.get("/posts/new", (req, res) => {
+    res.render("new.ejs")
+})
+
+// API for post request
+app.post("/posts", (req, res) => {
+    let {username, content} = req.body;
+    posts.push({username, content})
+    res.redirect("/posts") // the final redirection to the specified url
 })
 
 app.listen(port, ()=>{
