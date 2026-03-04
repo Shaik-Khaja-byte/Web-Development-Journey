@@ -65,17 +65,51 @@
 
 // classes
 
+// class Person {
+//     constructor(name, age){ // speacial method for creating and initializing an objectinstance of that class
+//         this.name = name;   // the internal implementation of this method is same as the above  
+//         this.age = age
+//     }
+//     talk(){
+//         console.log(`Hi, my name is ${name}`);
+//     }
+// }
+
+// let p1 = new Person("Shaik Khaja", 21)
+// let p2 = new Person("Rahul", 21)
+
+// console.log(p1.talk === p2.talk) // true
+
+//----------------------------------------------------------------------------------------------------------------------------
+
+// inheritance
+
 class Person {
-    constructor(name, age){ // speacial method for creating and initializing an objectinstance of that class
-        this.name = name;   // the internal implementation of this method is same as the above  
+    constructor(name, age){ 
+        console.log("Person constructor is being called")
+        this.name = name;   
         this.age = age
     }
     talk(){
-        console.log(`Hi, my name is ${name}`);
+        console.log(`Hi, my name is ${this.name}`);
     }
 }
 
-let p1 = new Person("Shaik Khaja", 21)
-let p2 = new Person("Rahul", 21)
+class Student extends Person {
+    constructor(name, age, marks){
+        console.log("Student constructor is being called")
+        super(name, age); // parent constructor is being called
+        this.marks = marks;
+    }
+}
 
-console.log(p1.talk === p2.talk) // true
+class Teacher extends Person {
+    constructor(name, age, subject){
+        console.log("Teacher constructor is being called")
+        super(name, age); // parent constructor is being called
+        this.subject = subject;
+    }
+}
+
+let s1 = new Student("Shaik Khaja", 21, 99);
+let t1 = new Teacher("CK Srinivas", 55, "Machine Learning");
