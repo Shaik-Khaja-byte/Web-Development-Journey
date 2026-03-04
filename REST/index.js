@@ -74,6 +74,14 @@ app.get("/posts/:id/edit", (req, res) => {
     res.render("edit.ejs", {post})
 })
 
+// API for deleting the post
+
+app.delete("/posts/:id", (req, res) => {
+    let {id} = req.params;
+    posts = posts.filter((p) => id !== p.id)
+    res.redirect("/posts")
+})
+
 app.listen(port, ()=>{
     console.log(`listening to port ${port}`);
 })

@@ -1,11 +1,60 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 30px;
+}
+
 h1 {
     color: maroon;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
 .post {
-    background-color: blanchedalmond;
+    background-color: white;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
 }
 
 .user {
     font-style: italic;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.content {
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+a {
+    text-decoration: none;
+    color: #0b5ed7;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+button:hover {
+    background-color: #c9302c;
+}
+
+form {
+    display: inline;
 }
