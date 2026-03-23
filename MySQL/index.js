@@ -10,11 +10,12 @@ const connection = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
-let q = "INSERT INTO user (id, username, email, password) VALUES (?, ?, ?, ?)";
-let user1 = ["123", "123_user", "abc@gmail.com", "123@abc"]
+let q = "INSERT INTO user (id, username, email, password) VALUES ?";
+let user = [["123b", "123_userb", "abcb@gmail.com", "123@abcb"],
+            ["123c", "123_userc", "abcc@gmail.com", "123@abcc"]];
 
 try {
-    connection.query(q, user1, (err, result) => {
+    connection.query(q, [user], (err, result) => {
     if(err) throw err;
     console.log(result);
     })
