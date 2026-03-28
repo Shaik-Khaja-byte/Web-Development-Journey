@@ -3,9 +3,12 @@ require('dotenv').config(); // LOAD THE SECRETS FIRST!
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
 const express = require('express');
-
 const app = express();
 const port = 8080;
+const path = require('path')
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "/views"));
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -25,8 +28,17 @@ let getRandomUser = () => {
 
 
 app.get("/", (req, res) => {
-    // console.log("welcome to the home page");
-    res.send("welcome to the home page");
+    let q = `SELECT count(*) FROM user`;
+    try {
+        connection.query(q, (err, result) => {
+        if(err) throw err;
+        let count = result[0]["count(*)"];
+        res.render("home.ejs", {count});
+        })
+    } catch(err) {
+        console.log(err);
+        res.send("some error in DB");
+    }
 })
 
 app.listen(port, (req, res) => {
@@ -34,13 +46,3 @@ app.listen(port, (req, res) => {
 })
 
 
-// try {
-//     connection.query(q, [data], (err, result) => {
-//     if(err) throw err;
-//     console.log(result);
-//     })
-// } catch(err) {
-//     console.log(err);
-// }
-
-// connection.end();
