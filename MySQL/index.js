@@ -2,6 +2,10 @@ require('dotenv').config(); // LOAD THE SECRETS FIRST!
 
 const { faker } = require('@faker-js/faker');
 const mysql = require('mysql2');
+const express = require('express');
+
+const app = express();
+const port = 8080;
 
 const connection = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -19,21 +23,24 @@ let getRandomUser = () => {
   ]
 }
 
-let q = "INSERT INTO user (id, username, email, password) VALUES ?";
 
-let data = []
-for(let i = 1;i<=100;i++){
-    data.push(getRandomUser()); // adding 100 fake users
-}
+app.get("/", (req, res) => {
+    // console.log("welcome to the home page");
+    res.send("welcome to the home page");
+})
+
+app.listen(port, (req, res) => {
+    console.log(`server is running on port ${port}`);
+})
 
 
-try {
-    connection.query(q, [data], (err, result) => {
-    if(err) throw err;
-    console.log(result);
-    })
-} catch(err) {
-    console.log(err);
-}
+// try {
+//     connection.query(q, [data], (err, result) => {
+//     if(err) throw err;
+//     console.log(result);
+//     })
+// } catch(err) {
+//     console.log(err);
+// }
 
-connection.end();
+// connection.end();
