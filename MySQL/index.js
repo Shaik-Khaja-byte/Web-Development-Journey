@@ -120,6 +120,34 @@ app.post("/user", (req, res) => {
     }
 })
 
+// get route - opens a form to cofirm the credentials
+app.get("/user/:id/delete", (req, res) => {
+    let { id } = req.params;
+
+    let q = `SELECT * FROM user WHERE id='${id}'`;
+
+    connection.query(q, (err, result) => {
+        let user = result[0];
+        res.render("delete.ejs", { user });
+    });
+});
+
+// Delete route
+app.delete("/user/:id", (req, res) => {
+    let {id} = req.params;
+    let {password: formPassword} = req.body;
+    let q = `DELETE FROM user WHERE id = '${id}'`;
+    try {
+        connection.query(q, (err, result) => {
+        if(err) throw err;
+        res.redirect("/users");
+        })
+    } catch(err) {
+        console.log(err);
+        res.send("some error in DB");
+    }
+})
+
 app.listen(port, (req, res) => {
     console.log(`server is running on port ${port}`);
 })
