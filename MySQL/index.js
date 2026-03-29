@@ -99,6 +99,27 @@ app.patch("/user/:id", (req, res) => {
     }
 })
 
+// Get route - opens a form to take information
+app.get("/user/new", (req, res) => {
+    res.render("newUser.ejs");
+})
+
+// Add route
+app.post("/user", (req, res) => {
+    let {username, email, password} = req.body;
+    let id = faker.string.uuid();
+    let q = `INSERT INTO user (id, username, email, password) VALUES (?, ?, ?, ?)`;
+    try {
+        connection.query(q, [id, username, email, password], (err, result) => {
+        if(err) throw err;
+        res.redirect("/users");
+        })
+    } catch(err) {
+        console.log(err);
+        res.send("some error in DB");
+    }
+})
+
 app.listen(port, (req, res) => {
     console.log(`server is running on port ${port}`);
 })
