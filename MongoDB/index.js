@@ -62,19 +62,27 @@ const User = mongoose.model("User", userSchema);
 
 // find in mongoose
 
-User.find({}) // return a thennable query object
+// User.find({}) // return a thennable query object
+//     .then(res => {console.log(res)})
+//     .catch(err => {console.log(err)});
+
+// User.find({age : {$lte: 21}})
+//     .then(res => {console.log(res[0].name)})
+//     .catch(err => {console.log(err)});
+
+// User.findOne({age : {$lte: 21}})
+//     .then(res => {console.log(res)})
+//     .catch(err => {console.log(err)});
+
+// User.findById("69cf9878a97cc1a54c5adcaa")
+//     .then(res => console.log(res.name))
+//     .catch(err => {console.log(err)});
+
+
+// updation in mongoose
+
+User.updateOne({name: "Shaik Khaja"}, {age: 22})
     .then(res => {console.log(res)})
-    .catch(err => {console.log(err)});
 
-User.find({age : {$lte: 21}})
-    .then(res => {console.log(res[0].name)})
-    .catch(err => {console.log(err)});
-
-User.findOne({age : {$lte: 21}})
+User.updateMany({age : {$gte: 21}}, {age: 21})
     .then(res => {console.log(res)})
-    .catch(err => {console.log(err)});
-
-User.findById("69cf9878a97cc1a54c5adcaa")
-    .then(res => console.log(res.name))
-    .catch(err => {console.log(err)});
-
