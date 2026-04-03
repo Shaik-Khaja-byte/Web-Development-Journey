@@ -90,8 +90,27 @@ const User = mongoose.model("User", userSchema);
 
 // find and update in mongoose
 
-User.findOneAndUpdate({name: "Shaik Khaja"}, {age: 69}, {new: true})
+// User.findOneAndUpdate({name: "Prashanth"}, {age: 69}, {new: true})
+//     .then(res => {console.log(res)})
+
+// User.findByIdAndUpdate("69cf9878a97cc1a54c5adcaa", {age: 96}, {new: true})
+//     .then(res => {console.log(res)})
+
+// delete in mongoose
+
+User.deleteOne({age: 20})
     .then(res => {console.log(res)})
 
-User.findByIdAndUpdate("69cf9878a97cc1a54c5adcaa", {age: 96}, {new: true})
+User.deleteMany({age: 21})
+    .then(res => {console.log(res)})
+
+// same problem it doesn't show you the result
+
+
+//find and delete in mongoose
+
+User.findByIdAndDelete("69cf9878a97cc1a54c5adcaa")
+    .then(res => {console.log(res)})
+
+User.findOneAndDelete({name: "Prashanth"})
     .then(res => {console.log(res)})
