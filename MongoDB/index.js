@@ -37,15 +37,24 @@ const User = mongoose.model("User", userSchema);
 //     .catch(err => {console.log(err)});
 
 
-const user2 = User({
-    name: "Prashanth",
-    email: "rockprashanth143@gmail.com",
-    age: 23
-});
+// const user2 = User({
+//     name: "Prashanth",
+//     email: "rockprashanth143@gmail.com",
+//     age: 23
+// });
 
-user2
-    .save()
-    .then((res) => {
-        console.log(res)
-    })
-    .catch(err => {console.log(err)});
+// user2
+//     .save()
+//     .then((res) => {
+//         console.log(res)
+//     })
+//     .catch(err => {console.log(err)});
+
+
+// insert multiple documents
+
+User.insertMany([
+    {name: "Tarun S", email: "tarunsalanke@gmail.com", age: 22},
+    {name: "Vaibhav", email: "vaibhavpulaskar@gmail.com", age: 20},
+    {name: "Saraswath H D", email: "saraswathhd@gmail.com", age: 21}
+]).then(res => console.log(res));
