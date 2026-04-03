@@ -53,8 +53,28 @@ const User = mongoose.model("User", userSchema);
 
 // insert multiple documents
 
-User.insertMany([
-    {name: "Tarun S", email: "tarunsalanke@gmail.com", age: 22},
-    {name: "Vaibhav", email: "vaibhavpulaskar@gmail.com", age: 20},
-    {name: "Saraswath H D", email: "saraswathhd@gmail.com", age: 21}
-]).then(res => console.log(res));
+// User.insertMany([
+//     {name: "Tarun S", email: "tarunsalanke@gmail.com", age: 22},
+//     {name: "Vaibhav", email: "vaibhavpulaskar@gmail.com", age: 20},
+//     {name: "Saraswath H D", email: "saraswathhd@gmail.com", age: 21}
+// ]).then(res => console.log(res));
+
+
+// find in mongoose
+
+User.find({}) // return a thennable query object
+    .then(res => {console.log(res)})
+    .catch(err => {console.log(err)});
+
+User.find({age : {$lte: 21}})
+    .then(res => {console.log(res[0].name)})
+    .catch(err => {console.log(err)});
+
+User.findOne({age : {$lte: 21}})
+    .then(res => {console.log(res)})
+    .catch(err => {console.log(err)});
+
+User.findById("69cf9878a97cc1a54c5adcaa")
+    .then(res => console.log(res.name))
+    .catch(err => {console.log(err)});
+
