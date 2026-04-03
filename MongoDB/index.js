@@ -20,5 +20,32 @@ const userSchema = mongoose.Schema({
 
 // creating models in mongoose
 
-// const User = mongoose.model("User", userSchema);
-const EMPLOYEE = mongoose.model("EMPLOYEE", userSchema);
+const User = mongoose.model("User", userSchema);
+
+// before inserting a document, create one!
+// const user1 = User({
+//     name: "Shaik Khaja",
+//     email: "khaja4756@gmail.com",
+//     age: 21
+// });
+
+// user1
+//     .save()
+//     .then((res) => {
+//         console.log(res)
+//     })
+//     .catch(err => {console.log(err)});
+
+
+const user2 = User({
+    name: "Prashanth",
+    email: "rockprashanth143@gmail.com",
+    age: 23
+});
+
+user2
+    .save()
+    .then((res) => {
+        console.log(res)
+    })
+    .catch(err => {console.log(err)});
