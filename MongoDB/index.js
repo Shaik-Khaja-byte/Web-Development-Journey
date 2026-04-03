@@ -81,8 +81,17 @@ const User = mongoose.model("User", userSchema);
 
 // updation in mongoose
 
-User.updateOne({name: "Shaik Khaja"}, {age: 22})
+// User.updateOne({name: "Shaik Khaja"}, {age: 22})
+//     .then(res => {console.log(res)})
+
+// User.updateMany({age : {$gte: 21}}, {age: 21})
+//     .then(res => {console.log(res)})
+
+
+// find and update in mongoose
+
+User.findOneAndUpdate({name: "Shaik Khaja"}, {age: 69}, {new: true})
     .then(res => {console.log(res)})
 
-User.updateMany({age : {$gte: 21}}, {age: 21})
+User.findByIdAndUpdate("69cf9878a97cc1a54c5adcaa", {age: 96}, {new: true})
     .then(res => {console.log(res)})
