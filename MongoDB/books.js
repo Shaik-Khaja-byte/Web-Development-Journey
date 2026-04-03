@@ -15,13 +15,22 @@ async function main() {
 const userSchema = mongoose.Schema({
     title: {
         type: String, 
+        maxLength: 30,
         required: true
     },
     author: {
          type: String
     },
     price: {
-        type: Number
+        type: Number,
+        min: 1
+    },
+    discount: {
+        type: Number,
+        default: 0
+    },
+    category: {
+        enum: ["fiction", "non fiction"]
     }
 })
 
@@ -31,27 +40,27 @@ const Book = mongoose.model("Book", userSchema);
 
 // inserting a book
 
-const book1 = new Book({
-    title: "Mathematics VII",
-    author: "R D Sharma",
-    price: "1200" // can be parsed/casted so no violation of schema validation
-});
+// const book1 = new Book({
+//     title: "Mathematics VII",
+//     author: "R D Sharma",
+//     price: "1200" // can be parsed/casted so no violation of schema validation
+// });
 
-book1
-    .save()
-    .then(res => {console.log(res)})
-    .catch(err => {console.log(err)});
+// book1
+//     .save()
+//     .then(res => {console.log(res)})
+//     .catch(err => {console.log(err)});
 
-const book2 = new Book({
-    title: "Duryodhan",
-    author: "Raghunathan",
-    //price: "abc"  schema violation - can't be parsed
-})
+// const book2 = new Book({
+//     title: "Duryodhan",
+//     author: "Raghunathan",
+//     //price: "abc"  schema violation - can't be parsed
+// })
 
-book2
-    .save()
-    .then(res => {console.log(res)})
-    .catch(err => {console.log(err)});
+// book2
+//     .save()
+//     .then(res => {console.log(res)})
+//     .catch(err => {console.log(err)});
 
 // const book3 = new Book({  // schema violation - skipped the required field
 //     author: "Raghunathan",
@@ -62,6 +71,19 @@ book2
 //     .save()
 //     .then(res => {console.log(res)})
 //     .catch(err => {console.log(err)});
+
+
+const book4 = new Book({
+    title: "Harry Potter 1",
+    author: "IDK",
+    price: -1, // min is 1
+    category: "BL" // no category in enum
+});
+
+book4
+    .save()
+    .then(res => {console.log(res)})
+    .catch(err => {console.log(err)});
 
 
 
