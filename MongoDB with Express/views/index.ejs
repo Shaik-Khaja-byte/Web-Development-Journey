@@ -7,17 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>All Chats</h2>
-    <br>
-    <% for(let chat of chats){ %>
-        <div class="chat">
-            <p>From: <%= chat.from %></p>
-            <div class="msg">
-                <p><%= chat.msg %></p>
+    <h2>Chats</h2>
+
+    <form method="GET" action="/chats/new">
+        <button type="submit">+ New Chat</button>
+    </form>
+
+    <div class="chat-container">
+        <% for(let chat of chats){ %>
+            <div class="chat">
+                <div class="users">
+                    <span>From: <b><%= chat.from %></b></span> ➔ 
+                    <span>To: <b><%= chat.to %></b></span>
+                </div>
+                
+                <div class="msg">
+                    <p><%= chat.msg %></p>
+                    <form action="/chats/<%= chat._id %>/edit" method="get"><button>Edit</button></form>
+                    <form method="POST" action="/chats/<%= chat._id %>?_method=DELETE"><button>Delete</button></form>
+                </div>
+
+                <div class="timestamp">
+                    <%= chat.created_at.toString().split(" ")[4] %> | 
+                    <%= chat.created_at.toString().split(" ").slice(0, 4).join(" ") %>
+                </div>
             </div>
-            <p>To: <%= chat.to %></p>
-        </div>
-        <hr>
-    <% } %>
+        <% } %>
+    </div>
 </body>
 </html>
