@@ -19,15 +19,15 @@ const port = 8080;
 // we always write the middlewares on the top
 
 // API token as query string
-app.use("/api", (req, res, next) => {
+const checkToken = ("/api", (req, res, next) => {
     let {token} = req.query;
     if( token === "giveaccess"){
-        next();
+        return next();
     }
-    res.send("ACCESS DENIED");
+    res.status(403).send("ACCESS DENIED");
 })
 
-app.get("/api", (req, res) => {
+app.get("/api", checkToken, (req, res) => {
     res.send("data");
 })
 
