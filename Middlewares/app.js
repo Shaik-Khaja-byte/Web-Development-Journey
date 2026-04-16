@@ -18,15 +18,29 @@ const port = 8080;
 // creating a utility based middleware
 // we always write the middlewares on the top
 
+// API token as query string
+app.use("/api", (req, res, next) => {
+    let {token} = req.query;
+    if( token === "giveaccess"){
+        next();
+    }
+    res.send("ACCESS DENIED");
+})
+
+app.get("/api", (req, res) => {
+    res.send("data");
+})
+
 app.use("/random", (req, res) => {
     res.send("this middleware is only for /random path");
 })
 
-app.use( (req, res, next) => {
-    req.time = new Date().toString();
-    console.log(req.method, req.hostname, req.path, req.time);
-    next();
-})
+// // logger
+// app.use( (req, res, next) => {
+//     req.time = new Date().toString();
+//     console.log(req.method, req.hostname, req.path, req.time);
+//     next();
+// })
 
 app.use( (req, res) => {
     res.send("404 Error");
