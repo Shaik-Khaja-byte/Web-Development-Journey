@@ -18,10 +18,18 @@ const port = 8080;
 // creating a utility based middleware
 // we always write the middlewares on the top
 
+app.use("/random", (req, res) => {
+    res.send("this middleware is only for /random path");
+})
+
 app.use( (req, res, next) => {
     req.time = new Date().toString();
     console.log(req.method, req.hostname, req.path, req.time);
     next();
+})
+
+app.use( (req, res) => {
+    res.send("404 Error");
 })
 
 app.get("/", (req, res) => {
