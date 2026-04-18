@@ -24,7 +24,11 @@ const checkToken = ("/api", (req, res, next) => {
     if( token === "giveaccess"){
         return next();
     }
-    res.status(403).send("ACCESS DENIED");
+    throw new Error("ACCESS DENIED");
+})
+
+app.get("/err", (req, res) => {
+    abcd = abcd;
 })
 
 app.get("/api", checkToken, (req, res) => {
@@ -52,6 +56,18 @@ app.get("/", (req, res) => {
 
 app.get("/random", (req, res) => {
     res.send("This is a random page");
+})
+
+// error handiling middlewares
+
+app.use((err, req, res, next) => {
+    console.log("--- ERROR ---");
+    next(err);
+})
+
+app.use((err, req, res, next) => {
+    console.log("--- ERROR2 Midlleware ---");
+    next(err);
 })
 
 app.listen(port, () => {
