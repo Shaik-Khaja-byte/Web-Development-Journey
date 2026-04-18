@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8080;
+const ExpressError = require("./ExpressError")
 
 // // for every request, It will send the same response, and it can never reach the below specified routes
 // app.use( (req, res, next) => { 
@@ -24,11 +25,15 @@ const checkToken = ("/api", (req, res, next) => {
     if( token === "giveaccess"){
         return next();
     }
-    throw new Error("ACCESS DENIED");
+    throw new ExpressError(401, "ACCESS DENIED");
 })
 
 app.get("/err", (req, res) => {
     abcd = abcd;
+})
+
+app.get("/admin", (req, res) => {
+    throw new ExpressError(403, "Access to admin is forbidden");
 })
 
 app.get("/api", checkToken, (req, res) => {
@@ -61,13 +66,8 @@ app.get("/random", (req, res) => {
 // error handiling middlewares
 
 app.use((err, req, res, next) => {
-    console.log("--- ERROR ---");
-    next(err);
-})
-
-app.use((err, req, res, next) => {
-    console.log("--- ERROR2 Midlleware ---");
-    next(err);
+    let {status = 500, message = "some unexpected error occured"} = err;
+    res.status(status).send(message);
 })
 
 app.listen(port, () => {
