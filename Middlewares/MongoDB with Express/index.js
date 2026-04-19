@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const Chat = require("./models/chat.js");
 const methodOverride = require('method-override');
+const ExpressError = require("./ExpressError.js")
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -29,6 +30,7 @@ app.get("/chats", async (req, res) => {
 
 // new route - to open a new chat form
 app.get("/chats/new", (req, res) => {
+    throw new ExpressError(404, "Page not Found");
     res.render("new.ejs");
 })
 
@@ -48,6 +50,17 @@ app.post("/chats", (req, res) => {
         .catch(err => {console.log(err)});
 
     res.redirect("/chats");
+})
+
+// new route - created to handle async errors
+
+app.get("/chats/:id", async (req, res, next) => {
+    let {id} = req.params;
+    let chat = await Chat.findById(id);
+    if(!chat){
+        next(new ExpressError(500, "Chat not found")); 
+    }
+    res.render("edit.ejs", {chat})
 })
 
 // edit route - opens a form to edit the message
@@ -82,6 +95,12 @@ app.delete("/chats/:id", async (req, res) => {
 
 app.get("/", (req, res) => {
     res.send("app is working");
+})
+
+// Error handing middleware
+app.use((err, req, res, next) => {
+    let {status = 500, message = "Some Unexpected Error"} = err;
+    res.status(status).send(message);
 })
 
 app.listen(port, (req, res) => {
