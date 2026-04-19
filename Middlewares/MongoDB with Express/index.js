@@ -110,6 +110,21 @@ app.get("/", (req, res) => {
     res.send("app is working");
 })
 
+
+function handleValidationErr(err){
+    console.log("This was a validation error, please follow the rules");
+    console.log(err.message);
+    return err;
+}
+
+app.use((err, req, res, next) => {
+    console.log(err.name);
+    if(err.name === "ValidationError"){
+        err = handleValidationErr(err);
+    }
+    next(err);
+})
+
 // Error handing middleware
 app.use((err, req, res, next) => {
     let {status = 500, message = "Some Unexpected Error"} = err;
