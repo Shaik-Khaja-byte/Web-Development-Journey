@@ -33,6 +33,7 @@ const addUser = async () => {
             }
         ]
     })
+    // you can add addresses like this too
     user1.addresses.push({location: "H1B Wall Street", city: "New York"});
     let result = await user1.save();
     console.log(result);
